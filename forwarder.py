@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt
+import time
 
-print ("running v0.11")
+print ("running v0.12")
 
 # mqtt specifics
 MQTT_HOST = "mosquitto"
@@ -18,7 +19,10 @@ def on_connect(client, data, flags, rc):
 # received message event
 def on_message(client, data, msg):
     print("Received topic:", str(msg.topic))
-    f = open("face.png", "wb")
+    current_time = time.time()
+    filename = "face_" + str(current_time) + ".png"
+    print(filename)
+    f = open(filename, "wb")
     f.write(msg.payload)
     f.close()
 

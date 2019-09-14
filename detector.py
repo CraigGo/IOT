@@ -1,6 +1,5 @@
 import numpy as np
 import cv2
-
 import paho.mqtt.client as mqtt
 
 print ("Running v0.6")
@@ -9,9 +8,15 @@ print ("Running v0.6")
 MQTT_HOST="mosquitto"
 MQTT_PORT=1883
 MQTT_TOPIC="test_topic"
-def on_connect(client, userdata, flags, rc):
-    print("connected with rc: " + str(rc))
 
+# connection event
+def on_connect(client, data, flags, rc):
+    if rc==0:
+        print("connected OK")
+    else:
+        print("Bad connection: ", str(rc))
+
+# create MQTT client
 mqttclient = mqtt.Client()
 mqttclient.on_connect = on_connect
 mqttclient.connect(MQTT_HOST, MQTT_PORT, 60)

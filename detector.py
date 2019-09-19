@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import paho.mqtt.client as mqtt
 
-print ("Running v0.6")
+print ("Running v0.7")
 
 # mqtt specifics
 MQTT_HOST="mosquitto"
@@ -37,12 +37,8 @@ while(True):
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
     for (x,y,w,h) in faces:
         face = frame[y:y+h, x:x+w]
-        print("face detected ", face.shape, face.dtype)
-        # msg = face.tobytes()
-        rc,jpg = cv2.imencode('.png', face)
+        print("face detected ", face.shape)
+        rc,jpg = cv2.imencode('.jpg', face)
         msg = jpg.tobytes()
         mqttclient.publish(MQTT_TOPIC, payload=msg, qos=0, retain=False)
-        # cv2.imshow('face', face)
-        # cv2.waitKey(0)
 
-     # cv2.destroyAllWindows()

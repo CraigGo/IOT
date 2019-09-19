@@ -20,11 +20,12 @@ def on_connect(client, data, flags, rc):
 def on_message(client, data, msg):
     print("Received topic:", str(msg.topic))
     current_time = time.time()
-    filename = "face_" + str(current_time) + ".png"
-    print(filename)
-    f = open(filename, "wb")
-    f.write(msg.payload)
-    f.close()
+    filename = "face_" + str(current_time) + ".jpg"
+    with open(filename, "wb") as f:
+        print("Writing: ", filename)
+        #f.write(cv2.imdecode(msg.payload))
+        f.write(msg.payload)
+        f.close()
 
 # create MQTT client
 client = mqtt.Client()

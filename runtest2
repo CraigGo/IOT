@@ -1,4 +1,7 @@
 #!/bin/bash
 
 #docker run --name $1 --network my-net $2 -it --rm $1
-docker run --name $1 -e DISPLAY=$DISPLAY --rm  --privileged -v /tmp:/tmp -ti --network my-net $1
+#docker run --name $1 -e DISPLAY=$DISPLAY --rm  --privileged -v /tmp:/tmp -v /mnt/mybucket:/mnt/mybucket -ti --network my-net $1
+docker run --name $1 -e DISPLAY=$DISPLAY --rm  --privileged -v /tmp:/tmp -v -ti --network my-net $1
+#docker run --name $1 -e DISPLAY=$DISPLAY --rm  --privileged -ti --network my-net $1
+
